@@ -110,6 +110,12 @@ export default class AppContainer extends Component {
         </div>
         <div className="col-xs-10">
         {
+
+
+
+
+
+
           this.state.selectedAlbum.id ?
           <Album
             album={this.state.selectedAlbum}
