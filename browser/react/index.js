@@ -4,7 +4,7 @@ import AppContainer from './containers/AppContainer';
 import {Router, Route, hashHistory} from 'react-router';
 
 ReactDOM.render(
-  <Router component={hashHistory}>
+  <Router history={hashHistory}>
     <Route path="/" component={AppContainer} />
   </Router>,
   document.getElementById('app')
