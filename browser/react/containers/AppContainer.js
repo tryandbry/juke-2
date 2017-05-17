@@ -4,10 +4,11 @@ import axios from 'axios';
 import initialState from '../initialState';
 import AUDIO from '../audio';
 
-import Albums from '../components/Albums.js';
+import Albums from '../components/Albums';
 import Album from '../components/Album';
 import Sidebar from '../components/Sidebar';
 import Player from '../components/Player';
+import Artists from '../components/Artists';
 
 import { convertAlbum, convertAlbums, skip } from '../utils';
 
@@ -30,11 +31,14 @@ export default class AppContainer extends Component {
       .then(res => res.data)
       .then(album => this.onLoad(convertAlbums(album)));
 
+    axios
+      .get('/api/artists/')
+      .then(res => this.setState({artists : res.data}))
+
     AUDIO.addEventListener('ended', () =>
       this.next());
     AUDIO.addEventListener('timeupdate', () =>
       this.setProgress(AUDIO.currentTime / AUDIO.duration));
-    
     
   }
 
@@ -99,6 +103,20 @@ export default class AppContainer extends Component {
           .setState({selectedAlbum: convertAlbum(album)})
       );
   }
+  
+  // selectArtist (artistId) {
+  //   axios
+  //       .get(`/api/artists/${artistId}`)
+  //       .then(res => {
+  //
+  //           return axios.get()
+  //       });
+  //
+  //   axios
+  //       .get(`/api/artists/${artistId}/songs`)
+  //       .then(res => this.setState({}))
+  //
+  // }
 
   deselectAlbum () {
     this.setState({ selectedAlbum: {}});
@@ -120,7 +138,9 @@ export default class AppContainer extends Component {
 	      isPlaying: this.state.isPlaying,
 	      toggle: this.toggleOne,
 	      albums: this.state.albums,
-	      selectAlbum: this.selectAlbum 
+	      selectAlbum: this.selectAlbum,
+          artists: this.state.artists,
+          selectedArtist: this.state.selectedArtist
 	    })
 	  : null
         }
