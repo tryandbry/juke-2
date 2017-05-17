@@ -102,7 +102,10 @@ export default class AppContainer extends Component {
       .then(res => res.data)
       .then(album => this
           .setState({selectedAlbum: convertAlbum(album)})
-      );
+      )
+      .catch(err => {
+	console.error("selecdtAlbum(): albumId not found",err);
+      });
   }
   
   selectArtist (artistId) {

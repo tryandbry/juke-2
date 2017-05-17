@@ -29,8 +29,15 @@ app.use(function (req, res, next) {
 
 });
 
-app.get('/*', function (req, res) {
+app.get('/', function (req, res) {
+    console.log("##########Express route \/ hit");
     res.sendFile(app.get('indexHTMLPath'));
+});
+
+app.get('/*', function (req, res) {
+    console.log("##########Express route \/\* hit");
+    res.redirect('/');
+    //res.sendFile(app.get('indexHTMLPath'));
 });
 
 // Error catching endware.

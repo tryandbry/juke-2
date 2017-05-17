@@ -22,8 +22,16 @@ class Artist extends React.Component {
       isPlaying:this.props.isPlaying,
       toggleOne:this.props.toggle
     }
+    console.log("Artist:",this.props.params.artistId,this.props);
+    const artistId = Object.keys(selectedArtist).length === 0 || selectedArtist.artist.id;
 
     return (
+      this.props.routeParams.artistId != artistId ? 
+      <div>
+	<h3>Artist not found!</h3>
+	<p>Try going back to <Link to="artists">Artists</Link> to find another one</p>
+      </div>
+      :
       <div>
 	<h3>{ selectedArtist.name }</h3>
 	<ul className="nav nav-tabs">
