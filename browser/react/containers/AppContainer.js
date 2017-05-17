@@ -34,6 +34,8 @@ export default class AppContainer extends Component {
       this.next());
     AUDIO.addEventListener('timeupdate', () =>
       this.setProgress(AUDIO.currentTime / AUDIO.duration));
+    
+    
   }
 
   onLoad (albums) {
@@ -93,9 +95,9 @@ export default class AppContainer extends Component {
   selectAlbum (albumId) {
     axios.get(`/api/albums/${albumId}`)
       .then(res => res.data)
-      .then(album => this.setState({
-        selectedAlbum: convertAlbum(album)
-      }));
+      .then(album => this
+          .setState({selectedAlbum: convertAlbum(album)})
+      );
   }
 
   deselectAlbum () {
